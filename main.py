@@ -48,7 +48,7 @@ def ask():
         # answer = qa_pipeline(question=question, context=best_answer)
 
         # AI response
-        ai_answer = "The Answer from the Link Expert System is: {}".format(user_question)
+        ai_answer = "here is your question:  {}".format(user_question)
 
         # Retrieve existing messages from session
         messages = session.get('messages', [])
