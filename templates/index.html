@@ -21,47 +21,56 @@
 </head>
 
 <body>
-    <!--begin container -->
+<!--begin container -->
 <div id="container">
-	<!--begin wrapper -->
-	<section id="dataextract" class="nine_section_wrapper">
 
-		<!--begin section -->
-		<div class="nine_section">
+    <!-- begin wrapper -->
+	<div class="newsletter_wrapper">
 
-			<!--begin row -->
+		<!-- begin newsletter_box -->
+		<div class="newsletter_box">
+
+			<!-- begin row -->
 			<div class="row">
 
-				<!--begin twelvecol -->
+				<!-- begin twelvecol -->
 				<div class="twelvecol">
-                    <h1>Expert System for Question Answering</h1>
 
-                    <div id="chat-container">
-                        {% for message_type, message_content in messages %}
-                            <div id="{{ message_type }}-message">
-                                <strong>{{ message_type.capitalize() }}:</strong> {{ message_content }}
-                            </div>
-                        {% endfor %}
-                    </div>
+					<!--begin newsletter form -->
+					<div class="contact_form_wrap bounce_fade">
+                        <h1>Expert System for Question Answering</h1>
 
-                    <form method="post" action="/ask">
-                        <label for="user_question">Ask a question:</label>
-                        <input type="text" id="user_question" name="user_question" required>
-                        <input type="hidden" name="messages" value="{{ messages }}">
-                        <button type="submit">Submit</button>
-                    </form>
+                        <div id="chat-container">
+                            {% for message_type, message_content in messages %}
+                                <div id="{{ message_type }}-message">
+                                    <strong>{{ message_type.capitalize() }}:</strong> {{ message_content }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <br /> <br />
+
+                        <form id="user-input" class="user-input" method="post" action="/ask">
+                            <label for="user_question" id="notification-label">Enter Question:</label>
+                            <input type="text" id="user_question" name="user_question" required>
+                            <input type="hidden" name="messages" value="{{ messages }}">
+                            <input type="submit" value="Send" id="submit-button" />
+                        </form>
+
+					</div>
+					<!--end newsletter form -->
 
 				</div>
-				<!--end twelvecol -->
+				<!-- end twelvecol -->
 
 			</div>
-			<!--end row -->
+			<!-- end row -->
 
 		</div>
-		<!--end nine_section -->
+		<!-- end newsletter_box -->
 
-	</section>
-	<!--end nine_section1 -->
+	</div>
+	<!-- end newsletter_wrapper -->
+
 </div>
 <!-- end of #container -->
 

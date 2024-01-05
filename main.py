@@ -12,7 +12,12 @@ from datetime import datetime
 import urllib.request
 import torch
 
+# generate a secret key:
+import secrets
+generated_key = secrets.token_hex(16)
+
 app = Flask(__name__)
+app.secret_key = generated_key  # Set a secret key for session security
 
 # Load the CSV file into a pandas DataFrame
 # df = pd.read_csv('data/data.csv')
@@ -24,7 +29,11 @@ qa_pipeline = pipeline("question-answering", model="bert-large-uncased-whole-wor
 def home():
     date = datetime.now()
     date_now = date.strftime("%Y%M")
-    return render_template('index.html', messages=[])
+
+    if 'messages' not in session:
+        session['messages'] = []
+
+    return render_template('index.html', messages=session['messages'])
 
 @app.route('/ask', methods=['POST'])
 def ask():
@@ -39,17 +48,18 @@ def ask():
         # answer = qa_pipeline(question=question, context=best_answer)
 
         # AI response
-        ai_answer = "Link expert system test... Your question is: {}".format(user_question)
+        ai_answer = "The Answer from the Link Expert System is: {}".format(user_question)
 
-        # Retrieve existing messages
-        messages = request.form.getlist('messages')
+        # Retrieve existing messages from session
+        messages = session.get('messages', [])
 
         # Append user's question and AI's answer to messages
         messages.append(('user', user_question))
         messages.append(('ai', ai_answer))
+        # Update session with the new messages
+        session['messages'] = messages
 
-        return render_template('index.html', messages=messages)
-
+        return render_template('index.html', messages=session['messages'])
 
 
 def find_best_answer(question, abstracts):
@@ -58,3 +68,10 @@ def find_best_answer(question, abstracts):
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+################################################################
+# Currently use an in-memory session storage,
+# if the Flask server restarts,
+# the session data will be lost.
+# For a more persistent solution,
+# consider using a database to store conversation history
