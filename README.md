@@ -80,3 +80,23 @@ Try out and use available algorithms such as Llama and Mistral7b in practice
     Topic Modeling:
         Latent Dirichlet Allocation (LDA) for identifying topics in a collection of documents.
 
+## HOW TO USE
+
+Navigate into this directory:
+1.Create and activate a Python virtual environment
+    $ python -m venv venv
+    On Windows:
+    $ source venv/Scripts/activate
+    On macOS/Linux:
+    $ source venv/bin/activate
+
+2.Update pip and install the required dependencies:
+    (venv) $ python.exe -m pip install --upgrade pip
+    (venv) $ pip install Flask
+    (venv) $ pip install transformers
+    (venv) $ pip install pandas
+    # install PyTorch
+    (venv) $ pip install torch   [or]   $ pip3 install torch torchvision torchaudio
+
+3.Start the Flask server:
+    (venv) $ python main.py

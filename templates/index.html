@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>link-Intelligence Expert System</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/static/src/favicon/favicon.ico">
+    <meta name="description" content="LLMS - Proof of Concept">
+    <meta name="author" content="xk">
+
+    <!-- CSS concatenated and minified via ant build script-->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/animate.css">
+    <link rel="stylesheet" href="/static/css/font-awesome.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,600,300,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Oswald:400,700,300' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+    <!-- end CSS-->
+</head>
+
+<body>
+    <!--begin container -->
+<div id="container">
+	<!--begin wrapper -->
+	<section id="dataextract" class="nine_section_wrapper">
+
+		<!--begin section -->
+		<div class="nine_section">
+
+			<!--begin row -->
+			<div class="row">
+
+				<!--begin twelvecol -->
+				<div class="twelvecol">
+                    <h1>Expert System for Question Answering</h1>
+
+                    <div id="chat-container">
+                        {% for message_type, message_content in messages %}
+                            <div id="{{ message_type }}-message">
+                                <strong>{{ message_type.capitalize() }}:</strong> {{ message_content }}
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <form method="post" action="/ask">
+                        <label for="user_question">Ask a question:</label>
+                        <input type="text" id="user_question" name="user_question" required>
+                        <input type="hidden" name="messages" value="{{ messages }}">
+                        <button type="submit">Submit</button>
+                    </form>
+
+				</div>
+				<!--end twelvecol -->
+
+			</div>
+			<!--end row -->
+
+		</div>
+		<!--end nine_section -->
+
+	</section>
+	<!--end nine_section1 -->
+</div>
+<!-- end of #container -->
+
+</body>
+</html>
